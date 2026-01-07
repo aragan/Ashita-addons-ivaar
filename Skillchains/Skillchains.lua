@@ -26,7 +26,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ]]
 
-_addon.author = 'Ivaar';
+_addon.author = 'Ivaar, edit by Aragan';
 _addon.name = 'SkillChains';
 _addon.version = '1.20.08.19';
 
@@ -123,14 +123,15 @@ function initialize()
     for k,v in pairs(config.Show) do
         setting[k] = S(config.Show[k])[info.job];
     end
-    if setting.spell and info.job == 20 then
+    -- SCH is index 20 in the jobs table; info.job is a string (e.g. 'SCH').
+    if setting.spell and info.job == 'SCH' then
         info.abilities = skills[20];
     end
     reset();
 end
 
 ashita.register_event('load', function()
-    config = ashita.settings.load_merged(_addon.path .. 'settings/settings.json', default);
+    config = ashita.settings.load_merged(_addon.path .. '/settings/settings.json', default);
     skill_props = AshitaCore:GetFontManager():Create('skill_props');
     skill_props:GetBackground():SetColor(config.display.bgcolor);
     skill_props:GetBackground():SetVisibility(config.display.bg);
